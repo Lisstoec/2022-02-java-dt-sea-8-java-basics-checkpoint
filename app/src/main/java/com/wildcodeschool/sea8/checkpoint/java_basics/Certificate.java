@@ -23,18 +23,25 @@ public class Certificate implements IExpireable {
 
     public void renew(long daysValidFromNow) {
         // TODO: renew certificate
+
+        this.validTo = LocalDate.now().plusDays(daysValidFromNow);
+        
     }
 
     @Override
     public boolean isExpired() {
         // TODO: Provide the neccessary check here
-        return false;
+
+        return this.validTo.isBefore(LocalDate.now());
+
     }
 
     @Override
     public LocalDate expiryDate() {
         // TODO: Return the expiration date
-        return null;
+
+        return this.validTo;
+
     }
 
     @Override
